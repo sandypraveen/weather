@@ -10,40 +10,49 @@ This repository provides a Spring Boot application that fetches weather data for
 - OpenWeather API Key: Create an account at OpenWeather and get your API Key.
 
 **Setup**
+
 **Spring Boot Application**
-**  Clone the repository:**
-  '''
-    git clone [repository-url]
-    cd [repository-name]
-  '''
+
+**Clone the repository:**
+
+  ```
+    git clone https://github.com/sandypraveen/weather.git
+    cd weather
+  ```
 
 **Build the project:**
-  '''
+
+  ```
     ./gradew build
-  '''
+  ```
 
 **Docker**
-  '''
+
+  ```
     docker build -t my-weather-app .
     docker login
     docker tag prvnv7/springboot:<tagname> prvnv7/springboot:<tagname>
     docker push prvnv7/springboot:<tagname>
-  '''
+  ```
 
 **Kubernetes & Helm**
-  Kubernetes is installed using kubeadm method, installation script is added under script folder
+
+- Kubernetes is installed using kubeadm method, installation script is added under script folder
 
 **Install the Helm chart:**
-'''
+
+```
   helm install weatherservice-release ./weatherservice/
-'''
+```
 
 **Check the service:**
-'''
+
+```
   kubectl get svc weatherservice-release
-'''
+```
 
 **Access the application**
-'''
+
+```
 curl http://[EXTERNAL-IP]/<NodePort>/weather/getCurrentWeather
-'''
+```
