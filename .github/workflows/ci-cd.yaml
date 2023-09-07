@@ -57,14 +57,11 @@ jobs:
       env:
         KUBECONFIG: $GITHUB_WORKSPACE/.kubeconfig
 
-    - name: Install Helm
-      uses: azure/setup-helm@v1
-      with:
-        version: 'v3.6.0'
-
     - name: Deploy with Helm
-      run: |
-        kubectl config view --minify --output 'jsonpath={..server}'
-        helm upgrade --install weatherservice-release ./weatherservice --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig
-        kubectl rollout status deployment/weatherservice-release
-
+      uses: wahyd4/kubectl-helm-action@master
+      env:
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+      with:
+        args: |
+          helm upgrade --install weatherservice-release ./weatherservice
+          kubectl rollout status deployment/weatherservice-release
