@@ -64,7 +64,7 @@ jobs:
 
     - name: Deploy with Helm
       run: |
-        cat $GITHUB_WORKSPACE/.kubeconfig
-        helm upgrade --install weatherservice-release ./weatherservice
+        kubectl config view --minify --output 'jsonpath={..server}'
+        helm upgrade --install weatherservice-release ./weatherservice --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig
         kubectl rollout status deployment/weatherservice-release
 
