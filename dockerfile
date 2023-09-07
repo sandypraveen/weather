@@ -10,5 +10,5 @@ RUN  chmod +x /app/weatherservice.jar
 # Set the container's entry point to run the JAR file
 ENTRYPOINT ["java", "-jar", "/app/weatherservice.jar"]
 
-# Expose the application's port (assuming it's 8080)
+# Expose the application's port
 EXPOSE 8080
