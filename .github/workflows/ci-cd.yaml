@@ -44,18 +44,13 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: kubernetes
     steps:
     - name: Checkout Code
       uses: actions/checkout@v2
 
     - name: Install and configure kubectl
       uses: azure/setup-kubectl@v1
-
-    - name: Set up kubeconfig
-      run: echo "${{ secrets.KUBE_CONFIG_DATA }}" | base64 --decode > $GITHUB_WORKSPACE/.kubeconfig
-      env:
-        KUBECONFIG: $GITHUB_WORKSPACE/.kubeconfig
 
     - name: Deploy with Helm
       uses: wahyd4/kubectl-helm-action@master
